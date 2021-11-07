@@ -74,13 +74,19 @@ class FacebookConversionAPI {
    * @param sourceUrl
    * @param purchaseData
    * @param eventData
+   * @param testEventCode
    */
   sendEvent(
     eventName: string, sourceUrl: string,
     purchaseData?: { value?: number, currency?: string }, eventData?: { eventId?: string },
+    testEventCode?: string | null,
   ): void {
     const eventRequest = (new bizSdk.EventRequest(this.accessToken, this.pixelId))
       .setEvents([this.#getEventData(eventName, sourceUrl, purchaseData, eventData)]);
+
+    if (testEventCode) {
+      eventRequest.setTestEventCode(testEventCode)
+    }
 
     this.contents = [];
 

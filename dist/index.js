@@ -60,10 +60,14 @@ class FacebookConversionAPI {
      * @param sourceUrl
      * @param purchaseData
      * @param eventData
+     * @param testEventCode
      */
-    sendEvent(eventName, sourceUrl, purchaseData, eventData) {
+    sendEvent(eventName, sourceUrl, purchaseData, eventData, testEventCode) {
         const eventRequest = (new bizSdk.EventRequest(this.accessToken, this.pixelId))
             .setEvents([__classPrivateFieldGet(this, _FacebookConversionAPI_instances, "m", _FacebookConversionAPI_getEventData).call(this, eventName, sourceUrl, purchaseData, eventData)]);
+        if (testEventCode) {
+            eventRequest.setTestEventCode(testEventCode);
+        }
         this.contents = [];
         eventRequest.execute().then((response) => response, (error) => error);
         if (this.debug) {

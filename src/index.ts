@@ -86,6 +86,7 @@ class FacebookConversionAPI {
 
     if (testEventCode) {
       eventRequest.setTestEventCode(testEventCode)
+      console.log(`Using test event code: ${testEventCode}`);
     }
 
     this.contents = [];
